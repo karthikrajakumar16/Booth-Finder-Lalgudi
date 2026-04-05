@@ -90,7 +90,12 @@ const BoothMap = () => {
                 >
                   <Popup>
                     <div className="text-sm">
-                      <p className="font-bold text-primary">Booth {booth.id}</p>
+                      <p className="font-bold text-primary">
+                        Booth {booth.id}
+                        {booth.votersCount && (
+                          <span> ({booth.votersCount.toLocaleString()} voters)</span>
+                        )}
+                      </p>
                       <p className="font-medium mt-1">{booth.name}</p>
                       <p className="text-muted-foreground text-xs mt-0.5">{booth.address}</p>
                     </div>
