@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap, Polygon } from "react-leaflet";
 import L from "leaflet";
 // eslint-disable-next-line import/no-unresolved
 import "leaflet/dist/leaflet.css";
@@ -49,6 +49,19 @@ const BoothMap = () => {
 
   const center: [number, number] = [10.8711, 78.8197];
 
+  // Lalgudi constituency boundary coordinates (polygon points)
+  const constituencyBoundary: [number, number][] = [
+    [11.100, 78.810],
+    [11.100, 79.015],
+    [11.020, 79.015],
+    [10.880, 79.000],
+    [10.845, 78.895],
+    [10.845, 78.710],
+    [10.915, 78.710],
+    [11.000, 78.815],
+    [11.100, 78.810],
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <header className="bg-primary text-primary-foreground py-5 px-6 shadow-lg">
@@ -75,6 +88,16 @@ const BoothMap = () => {
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <Polygon
+                positions={constituencyBoundary}
+                pathOptions={{
+                  color: "hsl(215, 75%, 20%)",
+                  weight: 3,
+                  opacity: 0.8,
+                  fillColor: "hsl(45, 100%, 50%)",
+                  fillOpacity: 0.05,
+                }}
               />
               <FlyToActive activeBoothId={activeBoothId} />
               {booths.map((booth) => (
